@@ -400,20 +400,12 @@ def F0(a,b,epsrel=0):
         low = (x <= 1e-10)
         high = (x > 1e-10) & (~inf)
         expr = np.zeros_like(x)
-
-        if np.any(inf):
-            expr[inf] = 0
-
-        if np.any(high):
-            expr[high] = log_1_plus_x(-np.exp(-x[high]))
-
-        if np.any(low):
-            expr[low] = (
-                np.log(x[low]) - x[low]/2 + x[low]**2/24 
-                - x[low]**4/2880 + x[low]**6/181440 
-                - x[low]**8/9676800 + x[low]**10/479001600
-            )
-
+        expr[high] = log_1_plus_x(-np.exp(-x[high]))
+        expr[low] = (
+            np.log(x[low]) - x[low]/2 + x[low]**2/24 
+            - x[low]**4/2880 + x[low]**6/181440 
+            - x[low]**8/9676800 + x[low]**10/479001600
+        )
         return expr
 
     if a.ndim == 1 and b.ndim == 2:
@@ -433,27 +425,24 @@ def F0(a,b,epsrel=0):
     both_low = (a < lowlim) & (b < lowlim)
     both_high = (a > upplim) & (b > upplim)
 
-    if np.any(both_low):
-        integral[both_low] = (
-            np.log(b[both_low]/a[both_low]) 
-            - (b[both_low]-a[both_low])/2 
-            + (b[both_low]-a[both_low])*(b[both_low]+a[both_low])/24
-            - (b[both_low]**4 - a[both_low]**4)/2880 
-            + (b[both_low]**6 - a[both_low]**6)/181440
-            - (b[both_low]**8 - a[both_low]**8)/9676800
-            + (b[both_low]**10 - a[both_low]**10)/479001600
-        )
-        if epsrel > 0:
+    integral[both_low] = (
+        np.log(b[both_low]/a[both_low]) 
+        - (b[both_low]-a[both_low])/2 
+        + (b[both_low]-a[both_low])*(b[both_low]+a[both_low])/24
+        - (b[both_low]**4 - a[both_low]**4)/2880 
+        + (b[both_low]**6 - a[both_low]**6)/181440
+        - (b[both_low]**8 - a[both_low]**8)/9676800
+        + (b[both_low]**10 - a[both_low]**10)/479001600
+    )
+    integral[both_high] = log_series_diff(
+        np.exp(-b[both_high]),
+        np.exp(-a[both_high])
+    )
+    if epsrel > 0:
+        if np.any(both_low):
             err = -(b[both_low]**12 - a[both_low]**12)*691/15692092416000
             check_err(integral[both_low], err, epsrel)
-
-    if np.any(both_high):
-        integral[both_high] = log_series_diff(
-            np.exp(-b[both_high]),
-            np.exp(-a[both_high])
-        )
-
-        if epsrel > 0:
+        if np.any(both_high):
             err = -(
                 np.exp(-b[both_high])**12 - 
                 np.exp(-a[both_high])**12
@@ -1412,7 +1401,7 @@ def F_log(a,b,tol=1e-10):
                 # B_n for n odd, n > 1 is zero.
             
     def high_summand(x, k):
-        # sp.expn does not support float128.
+        # sp.expn does not support float64.
 
         inf = (x == np.inf)
 

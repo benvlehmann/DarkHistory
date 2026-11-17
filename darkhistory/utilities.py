@@ -95,7 +95,7 @@ def compare_arr(ndarray_list):
 def log_1_plus_x(x):
     """ Computes log(1+x) with greater floating point accuracy.
 
-    Unlike ``scipy.special.log1p``, this can take ``float128``. However the performance is certainly slower. See [1]_ for details. If that trick does not work, the code reverts to a Taylor expansion.
+    Unlike ``scipy.special.log1p``, this can take ``float64``. However the performance is certainly slower. See [1]_ for details. If that trick does not work, the code reverts to a Taylor expansion.
 
     Parameters
     ----------
