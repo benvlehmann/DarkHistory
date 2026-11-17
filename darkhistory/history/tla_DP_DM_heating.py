@@ -7,7 +7,15 @@ import darkhistory.physics as phys
 import darkhistory.history.reionization as reion
 from scipy.integrate import odeint
 from scipy.integrate import solve_ivp
-from scipy.misc import derivative
+
+
+def derivative(f, x, dx=1.0):
+    """Central difference matching ``scipy.misc.derivative`` defaults.
+
+    ``scipy.misc.derivative(f, x)`` used a step of 1. That function was
+    removed in SciPy 1.12.
+    """
+    return (f(x + dx) - f(x - dx)) / (2 * dx)
 
 def compton_cooling_rate(xHII, xHeII, xHeIII, T_m, rs):
     """Returns the Compton cooling rate.
