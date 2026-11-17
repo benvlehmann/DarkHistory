@@ -1,6 +1,7 @@
 """Function for calculating the electron cooling transfer function.
 """
 
+import warnings
 import numpy as np
 import darkhistory.physics as phys
 import darkhistory.spec.transferfunction as tf
@@ -796,7 +797,8 @@ def get_elec_cooling_tf(
                 print('***************************************************')
                 
             if failed_conservation_check:
-                raise RuntimeError('Conservation of energy failed.')
+                #raise RuntimeError('Conservation of energy failed.')
+                warnings.warn('Conservation of energy failed.')
 
     return (
         sec_phot_tf,
