@@ -53,7 +53,7 @@ def thomson_spec_series(eleckineng, photeng, T, as_pairs=False):
     
     eta = photeng/T
 
-    prefac = np.float128(
+    prefac = np.float64(
         phys.c*(3/8)*phys.thomson_xsec/(4*gamma**2*beta**6)
         * (8*np.pi*T**2/(phys.ele_compton*phys.me)**3)
     )
@@ -487,8 +487,8 @@ def thomson_spec(eleckineng, photeng, T, as_pairs=False):
         spec = np.zeros_like(eleckineng)
         epsrel = np.zeros_like(eleckineng)
     else:
-        spec = np.zeros((eleckineng.size, photeng.size), dtype='float128')
-        epsrel = np.zeros((eleckineng.size, photeng.size), dtype='float128')
+        spec = np.zeros((eleckineng.size, photeng.size), dtype='float64')
+        epsrel = np.zeros((eleckineng.size, photeng.size), dtype='float64')
 
     spec[where_diff], err_with_diff = thomson_spec_diff(
         eleckineng_mask[where_diff], 
@@ -715,7 +715,7 @@ def rel_spec(eleceng, photeng, T, inf_upp_bound=False, as_pairs=False):
 
     Q[good] = (1/2)*Gamma_eps_q[good]**2/(1 + Gamma_eps_q[good])
 
-    prefac = np.float128( 
+    prefac = np.float64( 
         6*np.pi*phys.thomson_xsec*phys.c*T/(gamma**2)
         /(phys.ele_compton*phys.me)**3
     )
@@ -862,7 +862,7 @@ def ics_spec(
         eleceng_mask = np.outer(eleceng, np.ones(photeng.size))
         eleckineng_mask = np.outer(eleckineng, np.ones(photeng.size))
         photeng_mask = np.outer(np.ones(eleceng.size), photeng)
-        spec = np.zeros((eleceng.size, photeng.size), dtype='float128')
+        spec = np.zeros((eleceng.size, photeng.size), dtype='float64')
 
     rel_bound = 20
 

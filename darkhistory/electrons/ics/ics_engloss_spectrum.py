@@ -49,7 +49,7 @@ def engloss_spec_series(eleckineng, delta, T, as_pairs=False):
         lowlim_down = np.outer((1+beta)/(2*beta), delta/T)
         lowlim_up = np.outer((1-beta)/(2*beta), delta/T)
 
-    prefac = np.float128(
+    prefac = np.float64(
         phys.c*(3/8)*phys.thomson_xsec/(4*gamma**2*beta**6)
         * (8*np.pi*T**2/(phys.ele_compton*phys.me)**3)
     )
@@ -287,7 +287,7 @@ def engloss_spec(
         eleceng_mask = np.outer(eleceng, np.ones_like(eta))
         delta_mask = np.outer(np.ones_like(eleckineng), delta)
         spec = np.zeros(
-            (eleckineng.size, delta.size), dtype='float128'
+            (eleckineng.size, delta.size), dtype='float64'
         )
 
     beta_small = beta_mask < 0.1

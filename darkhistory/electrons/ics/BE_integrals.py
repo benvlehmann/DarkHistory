@@ -61,15 +61,15 @@ def F2(a,b,tol=1e-10):
         if b.shape[1] != a.size:
             raise TypeError('The second dimension of b must have the same length as a')
         # Extend a to a 2D array. 
-        a = np.outer(np.ones(b.shape[0], dtype='float128'), a)
+        a = np.outer(np.ones(b.shape[0], dtype='float64'), a)
     elif a.ndim == 2 and b.ndim == 1:
         if a.shape[1] != b.size:
             raise TypeError('The second dimension of a must have the same length as b')
-        b = np.outer(np.ones(a.shape[0], dtype='float128'), b)
+        b = np.outer(np.ones(a.shape[0], dtype='float64'), b)
 
     # if both are 1D, the rest of the code still works. 
 
-    integral  = np.zeros(a.shape, dtype='float128')
+    integral  = np.zeros(a.shape, dtype='float64')
     err       = np.zeros_like(integral)
     next_term = np.zeros_like(integral)
 
@@ -127,7 +127,7 @@ def F2(a,b,tol=1e-10):
         low_sum_bound =  low_summand(bound, 1)
 
         # Exact integral from 2 to infinity.
-        int_bound_inf = np.float128(1.417948518338124870521)
+        int_bound_inf = np.float64(1.417948518338124870521)
         # First term in integral from a to bound
         int_a_bound   = low_sum_bound - low_sum_a
         # First term in integral from bound to infinity
@@ -309,7 +309,7 @@ def F1(a,b,epsrel=0):
 
     # if both are 1D, then the rest of the code still works.
 
-    integral = np.zeros(a.shape, dtype='float128')
+    integral = np.zeros(a.shape, dtype='float64')
 
     both_low = (a < lowlim) & (b < lowlim)
     both_high = (a > upplim) & (b > upplim)
@@ -428,7 +428,7 @@ def F0(a,b,epsrel=0):
 
     # if both are 1D, then the rest of the code still works.
 
-    integral = np.zeros(a.shape, dtype='float128')
+    integral = np.zeros(a.shape, dtype='float64')
 
     both_low = (a < lowlim) & (b < lowlim)
     both_high = (a > upplim) & (b > upplim)
@@ -514,15 +514,15 @@ def F_inv(a,b,tol=1e-10):
         if b.shape[1] != a.size:
             raise TypeError('The second dimension of b must have the same length as a.')
         # Extend a to a 2D array.
-        a = np.outer(np.ones(b.shape[0],dtype='float128'), a)
+        a = np.outer(np.ones(b.shape[0],dtype='float64'), a)
     elif a.ndim == 2 and b.ndim == 1:
         if a.shape[1] != b.size:
             raise TypeError('The second dimension of a must have the same length as b.')
-        b = np.outer(np.ones(a.shape[0],dtype='float128'), b)
+        b = np.outer(np.ones(a.shape[0],dtype='float64'), b)
 
     # if both are 1D, then the rest of the code still works.
 
-    integral = np.zeros(a.shape, dtype='float128')
+    integral = np.zeros(a.shape, dtype='float64')
     err = np.zeros_like(integral)
     next_term = np.zeros_like(integral)
 
@@ -574,7 +574,7 @@ def F_inv(a,b,tol=1e-10):
         low_sum_bound = low_summand(bound, 1)
 
         # Exact integral from 2 to infinity.
-        int_bound_inf = np.float128(0.053082306482669888568)
+        int_bound_inf = np.float64(0.053082306482669888568)
         int_a_bound = low_sum_bound - low_sum_a
         int_bound_b = int_bound_inf - high_sum_b
 
@@ -673,7 +673,7 @@ def F_inv_a(lowlim, a, tol=1e-10):
         The resulting integral. 
     """
 
-    bound = np.ones_like(lowlim, dtype='float128')*2. 
+    bound = np.ones_like(lowlim, dtype='float64')*2. 
 
     # Two different series to approximate this: below and above bound. 
 
@@ -728,7 +728,7 @@ def F_inv_a(lowlim, a, tol=1e-10):
 
     # if both are 1D, then the rest of the code still works.
 
-    integral = np.zeros(lowlim.shape, dtype='float128')
+    integral = np.zeros(lowlim.shape, dtype='float64')
     err = np.zeros_like(integral)
     next_term = np.zeros_like(integral)
 
@@ -821,7 +821,7 @@ def F_inv_n(a,b,n,tol=1e-10):
         The resulting integral. 
     """
 
-    bound = np.float128(2.) 
+    bound = np.float64(2.) 
 
     # Two different series to approximate this: below and above bound.
 
@@ -857,15 +857,15 @@ def F_inv_n(a,b,n,tol=1e-10):
         if b.shape[1] != a.size:
             raise TypeError('The second dimension of b must have the same length as a.')
         # Extend a to a 2D array. 
-        a = np.outer(np.ones(b.shape[0],dtype='float128'), a)
+        a = np.outer(np.ones(b.shape[0],dtype='float64'), a)
     elif a.ndim == 2 and b.ndim == 1:
         if a.shape[1] != b.size:
             raise TypeError('The second dimension of a must have the same length as b.')
-        b = np.outer(np.ones(a.shape[0],dtype='float128'), b)
+        b = np.outer(np.ones(a.shape[0],dtype='float64'), b)
 
     # if both are 1D, then the rest of the code still works. 
 
-    integral = np.zeros_like(a, dtype='float128')
+    integral = np.zeros_like(a, dtype='float64')
     err = np.zeros_like(integral)
     next_term = np.zeros_like(integral)
 
@@ -1048,15 +1048,15 @@ def F_inv_3(a,b,tol=1e-10):
         if b.shape[1] != a.size:
             raise TypeError('The second dimension of b must have the same length as a.')
         # Extend a to a 2D array. 
-        a = np.outer(np.ones(b.shape[0],dtype='float128'), a)
+        a = np.outer(np.ones(b.shape[0],dtype='float64'), a)
     elif a.ndim == 2 and b.ndim == 1:
         if a.shape[1] != b.size:
             raise TypeError('The second dimension of a must have the same length as b.')
-        b = np.outer(np.ones(a.shape[0],dtype='float128'), b)
+        b = np.outer(np.ones(a.shape[0],dtype='float64'), b)
 
     # if both are 1D, then the rest of the code still works. 
 
-    integral = np.zeros_like(a, dtype='float128')
+    integral = np.zeros_like(a, dtype='float64')
     err = np.zeros_like(integral)
     next_term = np.zeros_like(integral)
 
@@ -1108,7 +1108,7 @@ def F_inv_3(a,b,tol=1e-10):
         low_sum_bound = low_summand(bound, 1)
 
         # Exact integral from 2 to infinity.
-        int_bound_inf = np.float128(0.0083036361900336)
+        int_bound_inf = np.float64(0.0083036361900336)
         int_a_bound = low_sum_bound - low_sum_a
         int_bound_b = int_bound_inf - high_sum_b
 
@@ -1235,15 +1235,15 @@ def F_inv_5(a,b,tol=1e-10):
         if b.shape[1] != a.size:
             raise TypeError('The second dimension of b must have the same length as a.')
         # Extend a to a 2D array. 
-        a = np.outer(np.ones(b.shape[0],dtype='float128'), a)
+        a = np.outer(np.ones(b.shape[0],dtype='float64'), a)
     elif a.ndim == 2 and b.ndim == 1:
         if a.shape[1] != b.size:
             raise TypeError('The second dimension of a must have the same length as b.')
-        b = np.outer(np.ones(a.shape[0],dtype='float128'), b)
+        b = np.outer(np.ones(a.shape[0],dtype='float64'), b)
 
     # if both are 1D, then the rest of the code still works. 
 
-    integral = np.zeros_like(a, dtype='float128')
+    integral = np.zeros_like(a, dtype='float64')
     err = np.zeros_like(integral)
     next_term = np.zeros_like(integral)
 
@@ -1295,7 +1295,7 @@ def F_inv_5(a,b,tol=1e-10):
         low_sum_bound = low_summand(bound, 1)
 
         # Exact integral from 2 to infinity.
-        int_bound_inf = np.float128(0.001483878955697788)
+        int_bound_inf = np.float64(0.001483878955697788)
         int_a_bound = low_sum_bound - low_sum_a
         int_bound_b = int_bound_inf - high_sum_b
 
@@ -1440,7 +1440,7 @@ def F_log(a,b,tol=1e-10):
 
     # if both are 1D, then the rest of the code still works.
 
-    integral = np.zeros(a.shape, dtype='float128')
+    integral = np.zeros(a.shape, dtype='float64')
     err = np.zeros_like(integral)
     next_term = np.zeros_like(integral)
 
@@ -1492,7 +1492,7 @@ def F_log(a,b,tol=1e-10):
         low_sum_bound = low_summand(bound, 1)
 
         # Exact integral from 2 to infinity.
-        int_bound_inf = np.float128(0.15171347859984083704)
+        int_bound_inf = np.float64(0.15171347859984083704)
         int_a_bound = low_sum_bound - low_sum_a
         int_bound_b = int_bound_inf - high_sum_b
 
@@ -1632,7 +1632,7 @@ def F_x_log(a,b,tol=1e-10):
 
     # if both are 1D, then the rest of the code still works.
 
-    integral = np.zeros(a.shape, dtype='float128')
+    integral = np.zeros(a.shape, dtype='float64')
     err = np.zeros_like(integral)
     next_term = np.zeros_like(integral)
 
@@ -1684,7 +1684,7 @@ def F_x_log(a,b,tol=1e-10):
         low_sum_bound = low_summand(bound, 1)
 
         # Exact integral from 2 to infinity. 
-        int_bound_inf = np.float128(0.4888742871822041)
+        int_bound_inf = np.float64(0.4888742871822041)
         int_a_bound = low_sum_bound - low_sum_a
         int_bound_b = int_bound_inf - high_sum_b
 
@@ -1782,7 +1782,7 @@ def F_log_a(lowlim, a, tol=1e-10):
         The resulting integral. 
     """
 
-    bound = np.ones_like(lowlim,dtype='float128')*2.
+    bound = np.ones_like(lowlim,dtype='float64')*2.
 
     # Two different series to approximate this: below and above bound. 
 
@@ -1860,7 +1860,7 @@ def F_log_a(lowlim, a, tol=1e-10):
 
     # if both are 1D, then the rest of the code still works.
 
-    integral = np.zeros(lowlim.shape, dtype='float128')
+    integral = np.zeros(lowlim.shape, dtype='float64')
     err = np.zeros_like(integral)
     next_term = np.zeros_like(integral)
 
@@ -1952,7 +1952,7 @@ def F_x_log_a(lowlim, a, tol=1e-10):
         The resulting integral. 
     """
 
-    bound = np.ones_like(lowlim, dtype='float128')*2
+    bound = np.ones_like(lowlim, dtype='float64')*2
 
     # Two different series to approximate this: below and above bound. 
 
@@ -2028,7 +2028,7 @@ def F_x_log_a(lowlim, a, tol=1e-10):
 
     # if both are 1D, then the rest of the code still works.
 
-    integral = np.zeros(lowlim.shape, dtype='float128')
+    integral = np.zeros(lowlim.shape, dtype='float64')
     err = np.zeros_like(integral)
     next_term = np.zeros_like(integral)
 

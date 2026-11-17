@@ -1047,7 +1047,7 @@ class Spectrum:
 
         # sec_spec_eng is the injected energy - delta,
         # use float128 for very small differences.
-        sec_spec_eng = np.flipud(np.float128(in_eng) - np.float128(self.eng))
+        sec_spec_eng = np.flipud(np.float64(in_eng) - np.float64(self.eng))
 
         N_arr = np.flipud(self.N)
 
@@ -1061,7 +1061,7 @@ class Spectrum:
 
         # print(sec_spec_eng[pos_eng])
 
-        out_eng = np.float128(out_eng)
+        out_eng = np.float64(out_eng)
 
         if N_arr[pos_eng].size > 1:
 
