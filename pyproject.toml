@@ -22,7 +22,7 @@ Homepage = "https://github.com/hongwanliu/DarkHistory"
 
 [tool.setuptools.packages.find]
 include = [
-    "darkhistory",
+    "darkhistory*",
     "examples",
     "README.md",
     "LICENSE"
